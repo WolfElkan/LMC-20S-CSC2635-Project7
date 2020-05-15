@@ -18,20 +18,20 @@ Be able to write a program in Java that implements the new topics of sorting, se
 8.	Submit
 9.	Demonstrate your running program to instructor. Be prepared to show all possible test cases and answer project-related questions.
 
-## New Material (Readings, Videos, etc…)
+## New Material (Readings, Videos, etc&hellip;)
 
 As this is a final project, you will be expected to implement concepts that we’ve covered throughout the semester (GUI and Object-Oriented Programming), in addition to the following new concepts: 
-•	Reading 
-o	Horstmann Chapter 14 : Sorting and Searching
-o	Horstmann Chapter 19 : Streams (specifically, Object streams in section 19.4)
-•	Lectures
-o	Searching and Sorting lectures 
-o	Streams lecture, specially object streams
+* Reading 
+    * Horstmann Chapter 14: Sorting and Searching
+    * Horstmann Chapter 19: Streams (specifically, Object streams in section 19.4)
+* Lectures
+    * Searching and Sorting lectures 
+    * Streams lecture, specially object streams
  
 ## Project Options
 ### 1. Mailbox
 #### Description
-1	
+	
 Write a GUI-based Mailbox tool that allows a user to
 
 - Create emails  (you don’t need to actually send an email)
@@ -49,7 +49,7 @@ The Mailbox object (instance) is automatically written out to an external FILE b
 Please review and follow good object-oriented design practices. 
 	
 #### Notes
-* The GUI Design  is up to you ( i.e., how you display the emails list, how you request sorting/searching fields, etc...). 
+* The GUI Design  is up to you ( i.e., how you display the emails list, how you request sorting/searching fields, etc&hellip;). 
 * File IO should be handled using object streams and serialization (easiest way to read in objects).
 * You have creative freedom to add any additional functionality that you like. 
 
@@ -82,24 +82,28 @@ Type|Component|Points|Notes (if any)
 Required|Compiles|20|
 Required|Executes|20| 
 Required|Correct|40|According to project instructions. (if it doesn’t compile and execute it’s not correct)
-Required|Demo|15|To instructor…
+Required|Demo|15|To instructor&hellip;
 Required|Summary|5	
 EC|Depends on problem.|varies|These require you to do on your own and may not have been discussed in class. 
-Penalty|Lateness|-20|...**per day** (limited time until the end of the semester). 
+Penalty|Lateness|-20|&hellip;**per day** (limited time until the end of the semester). 
 
 [Return to Instructions](#instructions)
 
-Summary
+## Summary
+
 Answer the following questions either in paragraph form or as answers to the numbered items: 
+
 1.	Describe how you approached and solved the problem(s). 
 2.	Where did you have trouble? How did you move forward? What topics still confuse you? 
 3.	What did you learn from this assignment? (be specific)
 4.	If you worked in pairs, how did divide up the work?
+
 Note: Each student must write their own, individual summary, even if you worked in pairs on the problems.
 
 [Return to Instructions](#instructions)
 
-Submitting Your Work
+## Submitting Your Work
+
 1.	Make sure that your name(s) are in all of your project source files.  
 2.	Place all source, test and summary files in a .zip compressed file. You do not need to submit the executable files
 3.	In Canvas attach your file to the assignment and submit.
