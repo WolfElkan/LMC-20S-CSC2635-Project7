@@ -72,6 +72,7 @@ Especially recommended if student has learned this material before and needs mor
 2.	It is related to the current topic 
 3.	It is of greater or equal complexity to the other options. 
 4.	Student gets the instructors’ approval
+
 [Return to Instructions](#instructions)
 
 ## Rubric
@@ -85,6 +86,7 @@ Required|Demo|15|To instructor…
 Required|Summary|5	
 EC|Depends on problem.|varies|These require you to do on your own and may not have been discussed in class. 
 Penalty|Lateness|-20|...**per day** (limited time until the end of the semester). 
+
 [Return to Instructions](#instructions)
 
 Summary
@@ -94,10 +96,12 @@ Answer the following questions either in paragraph form or as answers to the num
 3.	What did you learn from this assignment? (be specific)
 4.	If you worked in pairs, how did divide up the work?
 Note: Each student must write their own, individual summary, even if you worked in pairs on the problems.
+
 [Return to Instructions](#instructions)
 
 Submitting Your Work
 1.	Make sure that your name(s) are in all of your project source files.  
 2.	Place all source, test and summary files in a .zip compressed file. You do not need to submit the executable files
 3.	In Canvas attach your file to the assignment and submit.
+
 [Return to Instructions](#instructions)
