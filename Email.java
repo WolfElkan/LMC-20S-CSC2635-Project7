@@ -1,4 +1,5 @@
 import java.util.Date;
+import java.io.File;
 
 class Email {
 	public String sender;
@@ -16,5 +17,17 @@ class Email {
 	}
 	public Email(String csvrow) {
 		
+	}
+	public String sanitize(String text) {
+		return text;
+	}
+	public void writeCSV() {
+		System.out.print(sender+",");
+		System.out.print(recip+",");
+		System.out.print(subject+",");
+		System.out.print(content+",");
+		System.out.print(date.getTime()+",");
+
+		System.out.println();
 	}
 }

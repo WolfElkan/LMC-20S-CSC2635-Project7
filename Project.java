@@ -11,6 +11,7 @@ class Project {
 			"Hello Professor, This is my email."
 		);
 		Mailbox m = new Mailbox();
+		m.add(e);
 		m.writeCSV("emails");
 		// System.out.println(e.date.getTime());
 		Date k = new Date();
