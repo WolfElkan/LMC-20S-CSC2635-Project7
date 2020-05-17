@@ -3,35 +3,49 @@ import java.util.Calendar;
 import java.util.TimeZone;
 
 class ExcelDate extends Date {
-	public ExcelDate(long date) {
-		super(date);
+
+	private long epoch1900 = (long) 25569 * 86400 * 1000;
+	private long epoch1904 = (long) 24107 * 86400 * 1000;
+
+	public ExcelDate() {super();}
+	public ExcelDate(long date) {super(date);}
+
+	double Excel(long epoch) {
+		Calendar local = Calendar.getInstance();
+		TimeZone zone = local.getTimeZone();
+		return Excel(zone, epoch);
 	}
-	double Excel(int zone_offset) {
+	double Excel(TimeZone zone, long epoch) {
 		long ms = this.getTime();
-		ms += (long) 25569 * 86400 * 1000;
+		int offset = zone.getOffset(ms);
+		return Excel(offset, epoch);
+	}
+	double Excel(double tzh, long epoch) {
+		int zone_offset = (int) tzh;
+		zone_offset *= 3600000;
+		return Excel(zone_offset, epoch);
+	}
+	double Excel(int zone_offset, long epoch) {
+		long ms = this.getTime();
+		ms += epoch;
 		ms += zone_offset;
 		double excel = (double) ms;
 		excel /= 86400000;
 		return excel;
 	}
-	double Excel(double tzh) {
-		int zone_offset = (int) tzh;
-		zone_offset *= 3600000;
-		return Excel(zone_offset);
-	}
-	double Excel(TimeZone zone) {
-		long ms = this.getTime();
-		int offset = zone.getOffset(ms);
-		return Excel(offset);
-	}
-	double Excel() {
-		Calendar local = Calendar.getInstance();
-		TimeZone zone = local.getTimeZone();
-		return Excel(zone);
-	}
+
+	double Excel1900() {return Excel(epoch1900);}
+	double Excel1900(TimeZone zone) {return Excel(zone, epoch1900);}
+	double Excel1900(double tzh) {return Excel(tzh, epoch1900);}
+	double Excel1900(int tzms) {return Excel(tzms, epoch1900);}
+
+	double Excel1904() {return Excel(epoch1904);}
+	double Excel1904(TimeZone zone) {return Excel(zone, epoch1904);}
+	double Excel1904(double tzh) {return Excel(tzh, epoch1904);}
+	double Excel1904(int tzms) {return Excel(tzms, epoch1904);}
+
 	public static void main(String[] args) {
-		ExcelDate k = new ExcelDate(1589746962522L);
-		// System.out.println(k.toGMTString());
-		System.out.println(k.Excel());
+		ExcelDate k = new ExcelDate();
+		System.out.println(k.Excel1900());
 	}
 }
