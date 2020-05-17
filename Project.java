@@ -12,12 +12,13 @@ class Project {
 		);
 		Mailbox m = new Mailbox();
 		m.add(e);
-		m.writeCSV("emails");
+		// m.writeCSV("emails");
+
 		// System.out.println(e.date.getTime());
 		Date k = new Date();
 		CSV emails = new CSV();
 		// emails.write("ema.ils");
-		System.out.println("foo.bar".split("."));
+		System.out.println(k.getTime());
 
 		onClose();
 	}

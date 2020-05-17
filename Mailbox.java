@@ -24,3 +24,7 @@ class Mailbox {
 		}
 	}
 }
+
+class EmailCSV extends CSV {
+	
+}

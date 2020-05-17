@@ -19,13 +19,16 @@ class Email {
 		
 	}
 	public String sanitize(String text) {
+		if (text.contains(",")) {
+			return "\""+text+"\"";
+		}
 		return text;
 	}
 	public void writeCSV() {
-		System.out.print(sender+",");
-		System.out.print(recip+",");
-		System.out.print(subject+",");
-		System.out.print(content+",");
+		System.out.print(sanitize(sender)+",");
+		System.out.print(sanitize(recip)+",");
+		System.out.print(sanitize(subject)+",");
+		System.out.print(sanitize(content)+",");
 		System.out.print(date.getTime()+",");
 
 		System.out.println();
