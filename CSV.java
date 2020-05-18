@@ -78,6 +78,9 @@ class StringColumn extends Column {
 		int len = text.length();
 		String first = text.substring(0,1);
 		String last  = text.substring(len-1,len);
+		// System.out.print(first);
+		// System.out.print(last);
+		// System.out.println();
 		if (first.equals("\"") && last.equals("\"")){
 			return text.substring(1,len-1);
 		} else {
@@ -104,9 +107,41 @@ class CSV {
 	public void write(String filename, String ext, Object[] data) {
 		System.out.println(filename+"."+ext);
 	}
-	// public static String getNext(row) {
-		
-	// }
+	public static int nextValidComma(String row, int from) {
+		int comma = row.indexOf(",", from);
+		int quote = row.indexOf("\"", from);
+		if (comma == -1) {
+			return -1;
+			// return row.length();
+		} else if (comma < quote || quote == -1) {
+			return comma;
+		} else {
+			int endquote = row.indexOf("\"", quote+1);
+			return nextValidComma(row, endquote);
+		}
+	}
+	public static int nextValidComma(String row) {
+		return nextValidComma(row, 0);
+	}
+	public static String getNext(String[] rowref) {
+		String row = rowref[0];
+		// System.out.println(row);
+		// System.out.println();
+		if (!row.contains(",")) {
+			return StringColumn.desanitize(row);
+		}
+		int comma = nextValidComma(row);
+		if (comma == -1) {
+			return StringColumn.desanitize(row);
+		}
+		String data = row.substring(0,comma);
+		data = StringColumn.desanitize(data);
+		// System.out.println(comma);
+		row = row.substring(comma+1);
+		rowref[0] = row;
+		return data;
+		// System.out.println(data);
+	}
 	public Object read(String filename_ext) {return null;}
 	public static void main(String[] args) {
 		DateColumn con = new DateColumn("content");
