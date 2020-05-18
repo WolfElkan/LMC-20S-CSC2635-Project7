@@ -67,14 +67,14 @@ class StringColumn extends Column {
 		data = sanitize(data);
 		return data;
 	}
-	public String sanitize(String text) {
+	public static String sanitize(String text) {
 		if (text.contains(",")) {
 			return "\""+text+"\"";
 		} else {
 			return text;
 		}
 	}
-	public String desanitize(String text) {
+	public static String desanitize(String text) {
 		int len = text.length();
 		String first = text.substring(0,1);
 		String last  = text.substring(len-1,len);

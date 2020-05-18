@@ -2,13 +2,23 @@ import java.util.Date;
 import java.util.Calendar;
 import java.util.TimeZone;
 
-class ExcelDate extends Date {
+public class ExcelDate extends Date {
 
 	private long epoch1900 = (long) 25569 * 86400 * 1000;
 	private long epoch1904 = (long) 24107 * 86400 * 1000;
 
 	public ExcelDate() {super();}
 	public ExcelDate(long date) {super(date);}
+
+	public ExcelDate(Epoch sys, String data) {
+		double serial = Double.valueOf(data);
+		ExcelDate(sys, serial);
+	}
+	public ExcelDate(Epoch sys, double serial) {
+		serial *= 86400000;
+		long ms = Math.round(serial);
+		System.out.println(ms);
+	}
 
 	double Excel(long epoch) {
 		Calendar local = Calendar.getInstance();
@@ -43,6 +53,16 @@ class ExcelDate extends Date {
 	double Excel1904(TimeZone zone) {return Excel(zone, epoch1904);}
 	double Excel1904(double tzh) {return Excel(tzh, epoch1904);}
 	double Excel1904(int tzms) {return Excel(tzms, epoch1904);}
+
+	public String write(Epoch sys) {
+		if (sys == Epoch.MCM) {
+			return Double.toString(Excel1900());
+		} else if (sys == Epoch.MCMIV) {
+			return Double.toString(Excel1904());
+		} else {
+			return "1970";
+		}
+	}
 
 	public static void main(String[] args) {
 		ExcelDate k = new ExcelDate();

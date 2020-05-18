@@ -11,14 +11,15 @@ class Project {
 			"Hello Professor, This is my email."
 		);
 		Mailbox m = new Mailbox();
-		m.add(e);
-		m.writeCSV("emails");
+		e.write();
+		// m.add(e);
+		// m.writeCSV("emails");
 
 		// System.out.println(e.date.getTime());
-		Date k = new Date();
+		// Date k = new Date();
 		// CSV emails = new CSV();
 		// emails.write("ema.ils");
-		System.out.println(k.getTime());
+		// System.out.println(k.getTime());
 
 		onClose();
 	}
