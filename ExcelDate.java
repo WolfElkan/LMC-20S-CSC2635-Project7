@@ -17,7 +17,7 @@ public class ExcelDate extends Date {
 	public ExcelDate(Epoch sys, double serial) {
 		serial *= 86400000;
 		long ms = Math.round(serial);
-		System.out.println(ms);
+		ExcelDate(ms);
 	}
 
 	double Excel(long epoch) {
@@ -60,7 +60,7 @@ public class ExcelDate extends Date {
 		} else if (sys == Epoch.MCMIV) {
 			return Double.toString(Excel1904());
 		} else {
-			return "1970";
+			return Long.toString(this.getTime());
 		}
 	}
 

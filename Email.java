@@ -20,7 +20,7 @@ class Email {
 		System.out.print(',');
 		System.out.print(StringColumn.sanitize(recip  ));
 		System.out.print(',');
-		System.out.print(date.write(Epoch.MCM));
+		System.out.print(date.write(Epoch.UNIX));
 		System.out.print(',');
 		System.out.print(StringColumn.sanitize(subject));
 		System.out.print(',');
