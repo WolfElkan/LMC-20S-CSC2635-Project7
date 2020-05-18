@@ -18,13 +18,22 @@ class Mailbox {
 		}
 	}
 	public void writeCSV(String filename, String ext) {
-		System.out.println(filename+"."+ext);
-		for (int i=0; i<lContent; i++) {
-			content[i].writeCSV();
-		}
+		// System.out.println(filename+"."+ext);
+		// for (int i=0; i<lContent; i++) {
+		// 	content[i].writeCSV();
+		// }
+		Column[] columns = {
+			new StringColumn("Sender"),
+			new StringColumn("Recipient"),
+			new DateColumn("Date"),
+			new StringColumn("Subject"),
+			new StringColumn("Content"),
+		};
+		CSV csv = new CSV(columns);
+		csv.write(filename+"."+ext,content);
 	}
 }
 
-class EmailCSV extends CSV {
+// class EmailCSV extends CSV {
 	
-}
+// }
