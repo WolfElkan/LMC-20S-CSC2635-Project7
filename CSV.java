@@ -104,6 +104,9 @@ class CSV {
 	public void write(String filename, String ext, Object[] data) {
 		System.out.println(filename+"."+ext);
 	}
+	// public static String getNext(row) {
+		
+	// }
 	public Object read(String filename_ext) {return null;}
 	public static void main(String[] args) {
 		DateColumn con = new DateColumn("content");

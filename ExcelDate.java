@@ -10,15 +10,15 @@ public class ExcelDate extends Date {
 	public ExcelDate() {super();}
 	public ExcelDate(long date) {super(date);}
 
-	public ExcelDate(Epoch sys, String data) {
-		double serial = Double.valueOf(data);
-		ExcelDate(sys, serial);
-	}
-	public ExcelDate(Epoch sys, double serial) {
-		serial *= 86400000;
-		long ms = Math.round(serial);
-		ExcelDate(ms);
-	}
+	// public ExcelDate(Epoch sys, String data) {
+	// 	double serial = Double.valueOf(data);
+	// 	ExcelDate(sys, serial);
+	// }
+	// public ExcelDate(Epoch sys, double serial) {
+	// 	serial *= 86400000;
+	// 	long ms = Math.round(serial);
+	// 	ExcelDate(ms);
+	// }
 
 	double Excel(long epoch) {
 		Calendar local = Calendar.getInstance();
