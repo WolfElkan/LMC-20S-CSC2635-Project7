@@ -11,6 +11,19 @@ public class ExcelDate extends Date {
 	public ExcelDate(long date) {super(date);}
 
 	public ExcelDate(Epoch sys, String data) {
+		parseAndSet(sys, data, getTZms());
+	}
+	public ExcelDate(Epoch sys, String data, TimeZone zone) {
+		parseAndSet(sys, data, getTZms(zone));
+	}
+	public ExcelDate(Epoch sys, String data, double tzh) {
+		parseAndSet(sys, data, getTZms(tzh));
+	}
+	public ExcelDate(Epoch sys, String data, int tzms) {
+		parseAndSet(sys, data, tzms);
+	}
+
+	private void parseAndSet(Epoch sys, String data, int tzms) {
 		long ms;
 		if (sys == Epoch.UNIX) {
 			ms = Long.valueOf(data);
@@ -23,24 +36,34 @@ public class ExcelDate extends Date {
 			} else if (sys == Epoch.MCMIV) {
 				ms -= epoch1904;
 			}
+			ms -= tzms;
 		}
 		setTime(ms);
 	}
 
-	double Excel(long epoch) {
+	int getTZms() {
 		Calendar local = Calendar.getInstance();
 		TimeZone zone = local.getTimeZone();
-		return Excel(zone, epoch);
+		return getTZms(zone);
 	}
-	double Excel(TimeZone zone, long epoch) {
+	int getTZms(TimeZone zone) {
 		long ms = this.getTime();
-		int offset = zone.getOffset(ms);
-		return Excel(offset, epoch);
+		return zone.getOffset(ms);
 	}
-	double Excel(double tzh, long epoch) {
+	int getTZms(double tzh) {
 		int zone_offset = (int) tzh;
 		zone_offset *= 3600000;
-		return Excel(zone_offset, epoch);
+		return zone_offset;
+	}
+
+	double Excel(long epoch) {
+		return Excel(getTZms(), epoch);
+	}
+	double Excel(TimeZone zone, long epoch) {
+		return Excel(getTZms(zone), epoch);
+	}
+	double Excel(double tzh, long epoch) {
+		return Excel(getTZms(tzh), epoch);
 	}
 	double Excel(int zone_offset, long epoch) {
 		long ms = this.getTime();
@@ -72,7 +95,7 @@ public class ExcelDate extends Date {
 	}
 
 	public static void main(String[] args) {
-		ExcelDate k = new ExcelDate();
+		ExcelDate k = new ExcelDate(Epoch.MCM, "43970.515981006945");
 		System.out.println(k);
 		System.out.println(k.Excel1900());
 	}
