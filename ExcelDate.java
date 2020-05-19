@@ -11,17 +11,20 @@ public class ExcelDate extends Date {
 	public ExcelDate(long date) {super(date);}
 
 	public ExcelDate(Epoch sys, String data) {
+		long ms;
 		if (sys == Epoch.UNIX) {
-			double serial = Double.valueOf(data);
-			
+			ms = Long.valueOf(data);
 		} else {
-			long ms = 0;
-			setTime(ms);
+			double serial = Double.valueOf(data);
+			serial *= 86400000;
+			ms = Math.round(serial);
+			if (sys == Epoch.MCM) {
+				ms -= epoch1900;
+			} else if (sys == Epoch.MCMIV) {
+				ms -= epoch1904;
+			}
 		}
-		// double serial = Double.valueOf(data);
-		// serial *= 86400000;
-		// long ms = Math.round(serial);
-		// ExcelDate(ms);
+		setTime(ms);
 	}
 
 	double Excel(long epoch) {
@@ -70,6 +73,7 @@ public class ExcelDate extends Date {
 
 	public static void main(String[] args) {
 		ExcelDate k = new ExcelDate();
+		System.out.println(k);
 		System.out.println(k.Excel1900());
 	}
 }
