@@ -24,12 +24,18 @@ class Mailbox {
 		}
 	}
 	public void writeCSV(String filename, String ext) throws IOException {
+			StringColumn senColumn = new StringColumn("Sender");
+			StringColumn recColumn = new StringColumn("Recipient");
+			DateColumn  dateColumn = new DateColumn("Date");
+			StringColumn subColumn = new StringColumn("Subject");
+			StringColumn conColumn = new StringColumn("Content");
+		dateColumn.sys = Epoch.MCM;
 		Column[] columns = {
-			new StringColumn("Sender"),
-			new StringColumn("Recipient"),
-			new DateColumn("Date"),
-			new StringColumn("Subject"),
-			new StringColumn("Content"),
+			senColumn,
+			recColumn,
+			dateColumn,
+			subColumn,
+			conColumn,
 		};
 		FileWriter file = new FileWriter(filename+"."+ext);
 		for (int c=0; c<5; c++) {
@@ -41,7 +47,7 @@ class Mailbox {
 			}
 		}
 		for (int i=0; i<lContent; i++) {
-			content[i].write(file);
+			content[i].write(file, columns);
 		}
 		file.close();
 	}

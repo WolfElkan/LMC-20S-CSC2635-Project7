@@ -38,6 +38,31 @@ class Email {
 		file.write(StringColumn.sanitize(content));
 		file.write('\n');
 	}
+	public void write(FileWriter file, Column[] columns) throws IOException {
+		for (int c=0; c<5; c++) {
+			file.write(yield(columns[c]));
+			if (c < 4) {
+				file.write(',');
+			} else {
+				file.write('\n');
+			}
+		}
+	}
+	public String yield(Column column) {
+		switch (column.title) {
+			case "Sender":
+				return sender;
+			case "Recipient":
+				return recip;
+			case "Subject":
+				return subject;
+			case "Content":
+				return content;
+			case "Date":
+				return column.write(date);
+		}
+		return "";
+	}
 	public static void main(String[] args) {
 		String csvrow = "WolfElkan@landmark.edu,KarinaAssiter@landmark.edu,1589837225266,Final Project,\"Hello Professor, This is my email.\"";
 		Email e = new Email(csvrow);

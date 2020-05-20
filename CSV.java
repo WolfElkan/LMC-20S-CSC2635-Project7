@@ -43,9 +43,14 @@ class DateColumn extends Column {
 		return date;
 	}
 	public String write(Object entity) {
-		return "hi";
+		ExcelDate date = (ExcelDate) entity;
+		return write(date);
 	}
 	public String write(Date entity) {
+		ExcelDate date = (ExcelDate) entity;
+		return write(date);
+	}
+	public String write(ExcelDate entity) {
 		long unix = entity.getTime();
 		if (sys == Epoch.UNIX) {
 			return Long.toString(unix);
