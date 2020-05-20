@@ -40,7 +40,8 @@ class Email {
 	}
 	public void write(FileWriter file, Column[] columns) throws IOException {
 		for (int c=0; c<5; c++) {
-			file.write(yield(columns[c]));
+			Column column = columns[c];
+			file.write(column.write(yield(column)));
 			if (c < 4) {
 				file.write(',');
 			} else {
@@ -48,7 +49,7 @@ class Email {
 			}
 		}
 	}
-	public String yield(Column column) {
+	public Object yield(Column column) {
 		switch (column.title) {
 			case "Sender":
 				return sender;
@@ -59,9 +60,9 @@ class Email {
 			case "Content":
 				return content;
 			case "Date":
-				return column.write(date);
+				return date;
 		}
-		return "";
+		return "Email.java:65";
 	}
 	public static void main(String[] args) {
 		String csvrow = "WolfElkan@landmark.edu,KarinaAssiter@landmark.edu,1589837225266,Final Project,\"Hello Professor, This is my email.\"";

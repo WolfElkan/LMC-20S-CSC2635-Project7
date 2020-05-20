@@ -25,12 +25,6 @@ abstract class Column {
 	}
 }
 
-enum Epoch {
-	MCM,   // Microsoft Excel date system
-	MCMIV, // Microsoft Excel 1904-based date system
-	UNIX,  // Standard Unix Time
-}
-
 class DateColumn extends Column {
 	public Epoch sys = Epoch.UNIX;
 	public DateColumn(String title) {super(title);}
@@ -88,9 +82,6 @@ class StringColumn extends Column {
 		int len = text.length();
 		String first = text.substring(0,1);
 		String last  = text.substring(len-1,len);
-		// System.out.print(first);
-		// System.out.print(last);
-		// System.out.println();
 		if (first.equals("\"") && last.equals("\"")){
 			return text.substring(1,len-1);
 		} else {
@@ -135,8 +126,6 @@ class CSV {
 	}
 	public static String getNext(String[] rowref) {
 		String row = rowref[0];
-		// System.out.println(row);
-		// System.out.println();
 		if (!row.contains(",")) {
 			return StringColumn.desanitize(row);
 		}
@@ -146,11 +135,9 @@ class CSV {
 		}
 		String data = row.substring(0,comma);
 		data = StringColumn.desanitize(data);
-		// System.out.println(comma);
 		row = row.substring(comma+1);
 		rowref[0] = row;
 		return data;
-		// System.out.println(data);
 	}
 	public Object read(String filename_ext) {return null;}
 	public static void main(String[] args) {

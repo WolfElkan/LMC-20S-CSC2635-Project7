@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileWriter;
+import java.io.FileReader;
 import java.io.IOException;
 
 class Mailbox {
@@ -10,7 +11,10 @@ class Mailbox {
 		content[lContent++] = email;
 	}
 	public Mailbox() {}
-	public Mailbox(File file) {
+	public Mailbox(FileReader file) throws IOException {
+		char[] cbuf = {};
+		file.read(cbuf);
+		System.out.println(cbuf);
 
 	}
 	public void writeCSV(String filename) throws IOException {

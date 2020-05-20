@@ -2,6 +2,12 @@ import java.util.Date;
 import java.util.Calendar;
 import java.util.TimeZone;
 
+enum Epoch {
+	UNIX,  // Seconds since midnight January 1, 1970 GMT
+	MCM,   // Days since midnight January 1, 1900 local time
+	MCMIV, // Days since midnight January 1, 1904 local time
+}
+
 public class ExcelDate extends Date {
 
 	private long epoch1900 = (long) 25569 * 86400 * 1000;
