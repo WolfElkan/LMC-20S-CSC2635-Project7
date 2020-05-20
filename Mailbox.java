@@ -2,9 +2,10 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Scanner;
 
-class Mailbox {
+class Mailbox implements Serializable {
 	public Email[] content = new Email[256];
 	public int lContent = 0; // length of content
 	public int sortstate = 0; // how is Mailbox currently sorted
@@ -15,7 +16,8 @@ class Mailbox {
 	public Mailbox(Scanner file) throws IOException {
 		// char[] cbuf = {};
 		// file.read(cbuf);
-		// System.out.println(cbuf);
+		// System.out.println(file.nextLine());
+		CSV csv = new CSV(file.nextLine());
 
 	}
 	public void writeCSV(String filename) throws IOException {

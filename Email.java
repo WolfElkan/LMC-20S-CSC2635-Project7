@@ -1,8 +1,9 @@
 import java.util.Date;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Serializable;
 
-class Email {
+class Email implements Serializable {
 	public String sender;
 	public String recip;
 	public ExcelDate date;

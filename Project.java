@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 class Project {
 	public static void main(String[] args) throws IOException {
-		onOpen();
+		// onOpen();
 
 		String filename = "emails.csv";
 		File file = new File(filename);
@@ -14,6 +14,7 @@ class Project {
 		if (file.exists()) {
 			Scanner reader = new Scanner(file);
 			mail = new Mailbox(reader);
+			reader.close();
 		} else {
 			mail = new Mailbox();
 		}

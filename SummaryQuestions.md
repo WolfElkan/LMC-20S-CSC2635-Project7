@@ -1,6 +1,9 @@
 # Summary Questions
 
 ## Describe how you approached and solved the problem(s). 
+
+
+
 ## Where did you have trouble? How did you move forward? What topics still confuse you? 
 ## What did you learn from this assignment? (be specific)
 
@@ -9,3 +12,5 @@ I learned that I need to improve my workflow.  I need to make a functioning prot
 One aspect in which I did do this well was in the `onOpen()` and `onClose()` methods.  I wrote the logic that called these methods in the `Project.main` method while the methods themselves were still blank.  In the future, I should do this with all modules.
 
 ## If you worked in pairs, how did divide up the work?
+
+I completed this assignment alone.
