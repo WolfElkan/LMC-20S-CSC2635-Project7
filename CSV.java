@@ -1,5 +1,6 @@
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Date;
 
 abstract class Column {
@@ -95,18 +96,33 @@ class CSV {
 	public CSV(Column[] columns) {
 		this.columns = columns;
 	}
-	public void write(String filename, Object[] data) {
+	public void write(String filename, Mailbox mail) throws IOException {
 		if (filename.contains(".")) {
 			int dot = filename.lastIndexOf(".");
 			String ext = filename.substring(dot+1);
 			filename = filename.substring(0,dot);
-			write(filename,ext,data);
+			write(filename,ext,mail);
 		} else {
-			write(filename,"csv",data);
+			write(filename,"csv",mail);
 		}
 	}
-	public void write(String filename, String ext, Object[] data) {
+	public void write(String filename, String ext, Mailbox mail) throws IOException {
+		System.out.print("File Written: ");
 		System.out.println(filename+"."+ext);
+		
+		FileWriter file = new FileWriter(filename+"."+ext);
+		for (int c=0; c<5; c++) {
+			file.write(columns[c].header());
+			if (c < 4) {
+				file.write(',');
+			} else {
+				file.write('\n');
+			}
+		}
+		for (int i=0; i<mail.lContent; i++) {
+			mail.content[i].write(file, columns);
+		}
+		file.close();
 	}
 	public static int nextValidComma(String row, int from) {
 		int comma = row.indexOf(",", from);

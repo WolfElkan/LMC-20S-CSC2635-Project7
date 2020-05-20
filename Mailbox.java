@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Scanner;
 
 class Mailbox {
 	public Email[] content = new Email[256];
@@ -11,10 +12,10 @@ class Mailbox {
 		content[lContent++] = email;
 	}
 	public Mailbox() {}
-	public Mailbox(FileReader file) throws IOException {
-		char[] cbuf = {};
-		file.read(cbuf);
-		System.out.println(cbuf);
+	public Mailbox(Scanner file) throws IOException {
+		// char[] cbuf = {};
+		// file.read(cbuf);
+		// System.out.println(cbuf);
 
 	}
 	public void writeCSV(String filename) throws IOException {
@@ -41,18 +42,7 @@ class Mailbox {
 			subColumn,
 			conColumn,
 		};
-		FileWriter file = new FileWriter(filename+"."+ext);
-		for (int c=0; c<5; c++) {
-			file.write(columns[c].header());
-			if (c < 4) {
-				file.write(',');
-			} else {
-				file.write('\n');
-			}
-		}
-		for (int i=0; i<lContent; i++) {
-			content[i].write(file, columns);
-		}
-		file.close();
+		CSV csv = new CSV(columns);
+		csv.write(filename, ext, this);
 	}
 }
