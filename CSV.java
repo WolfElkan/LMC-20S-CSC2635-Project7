@@ -4,6 +4,9 @@ import java.util.Date;
 
 abstract class Column {
 	public String title;
+	public String header() {
+		return title;
+	}
 	public Column(String title) {
 		this.title = title;
 	}
@@ -31,7 +34,9 @@ enum Epoch {
 class DateColumn extends Column {
 	public Epoch sys = Epoch.UNIX;
 	public DateColumn(String title) {super(title);}
-
+	public String header() {
+		return title + " (" + sys + ")";
+	}
 	public Object read(String data) {
 		long millisecond = Long.parseLong(data);
 		Date date = new Date(millisecond);

@@ -1,5 +1,6 @@
 import java.util.Date;
-import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 class Email {
 	public String sender;
@@ -24,57 +25,18 @@ class Email {
 		this.date = new ExcelDate(ms);
 		subject = CSV.getNext(rowref);
 		content = CSV.getNext(rowref);
-
-		// System.out.println(rowref[0]);
-
-		// int comma = csvrow.indexOf(",");
-		// String sender  = csvrow.substring(0,comma);
-		// // System.out.println(sender );
-		// sender = StringColumn.desanitize(sender);
-		// this.sender = sender;
-		// csvrow = csvrow.substring(comma+1);
-
-		// comma = csvrow.indexOf(",");
-		// String recip   = csvrow.substring(0,comma);
-		// // System.out.println(recip  );
-		// recip = StringColumn.desanitize(recip);
-		// this.recip = recip;
-		// csvrow = csvrow.substring(comma+1);
-
-		// comma = csvrow.indexOf(",");
-		// String date    = csvrow.substring(0,comma);
-		// // System.out.println(date   );
-		// long ms = Long.parseLong(date);
-		// this.date = new ExcelDate(ms);
-		// csvrow = csvrow.substring(comma+1);
-
-		// comma = csvrow.indexOf(",");
-		// String subject = csvrow.substring(0,comma);
-		// // System.out.println(subject);
-		// subject = StringColumn.desanitize(subject);
-		// this.subject = subject;
-		// csvrow = csvrow.substring(comma+1);
-
-		// comma = csvrow.indexOf(",");
-		// String content = csvrow.substring(0,comma);
-		// // System.out.println(content);
-		// content = StringColumn.desanitize(content);
-		// this.content = content;
-		// csvrow = csvrow.substring(comma+1);
-
-		// System.out.println(comma);
 	}
-	public void write() {
-		System.out.print(StringColumn.sanitize(sender ));
-		System.out.print(',');
-		System.out.print(StringColumn.sanitize(recip  ));
-		System.out.print(',');
-		System.out.print(date.write(Epoch.UNIX));
-		System.out.print(',');
-		System.out.print(StringColumn.sanitize(subject));
-		System.out.print(',');
-		System.out.print(StringColumn.sanitize(content));
-		System.out.println();
+	public void write(FileWriter file) throws IOException {
+		file.write(StringColumn.sanitize(sender ));
+		file.write(',');
+		file.write(StringColumn.sanitize(recip  ));
+		file.write(',');
+		file.write(date.write(Epoch.UNIX));
+		file.write(',');
+		file.write(StringColumn.sanitize(subject));
+		file.write(',');
+		file.write(StringColumn.sanitize(content));
+		file.write('\n');
 	}
 	public static void main(String[] args) {
 		String csvrow = "WolfElkan@landmark.edu,KarinaAssiter@landmark.edu,1589837225266,Final Project,\"Hello Professor, This is my email.\"";

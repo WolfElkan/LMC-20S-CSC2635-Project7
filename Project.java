@@ -12,14 +12,6 @@ class Project {
 		);
 		Mailbox m = new Mailbox();
 		e.write();
-		// m.add(e);
-		// m.writeCSV("emails");
-
-		// System.out.println(e.date.getTime());
-		// Date k = new Date();
-		// CSV emails = new CSV();
-		// emails.write("ema.ils");
-		// System.out.println(k.getTime());
 
 		onClose();
 	}
