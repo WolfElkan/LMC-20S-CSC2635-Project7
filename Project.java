@@ -1,7 +1,8 @@
 import java.util.Date;
+import java.io.IOException;
 
 class Project {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		onOpen();
 
 		Email e = new Email(
@@ -11,7 +12,8 @@ class Project {
 			"Hello Professor, This is my email."
 		);
 		Mailbox m = new Mailbox();
-		e.write();
+		m.add(e);
+		m.writeCSV("emails");
 
 		onClose();
 	}

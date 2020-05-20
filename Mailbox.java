@@ -1,4 +1,6 @@
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 class Mailbox {
 	public Email[] content = new Email[256];
@@ -7,7 +9,11 @@ class Mailbox {
 	public void add(Email email) {
 		content[lContent++] = email;
 	}
-	public void writeCSV(String filename) {
+	public Mailbox() {}
+	public Mailbox(File file) {
+
+	}
+	public void writeCSV(String filename) throws IOException {
 		if (filename.contains(".")) {
 			int dot = filename.lastIndexOf(".");
 			String ext = filename.substring(dot+1);
@@ -17,11 +23,7 @@ class Mailbox {
 			writeCSV(filename,"csv");
 		}
 	}
-	public void writeCSV(String filename, String ext) {
-		// System.out.println(filename+"."+ext);
-		// for (int i=0; i<lContent; i++) {
-		// 	content[i].writeCSV();
-		// }
+	public void writeCSV(String filename, String ext) throws IOException {
 		Column[] columns = {
 			new StringColumn("Sender"),
 			new StringColumn("Recipient"),
@@ -29,11 +31,18 @@ class Mailbox {
 			new StringColumn("Subject"),
 			new StringColumn("Content"),
 		};
-		CSV csv = new CSV(columns);
-		csv.write(filename+"."+ext,content);
+		FileWriter file = new FileWriter(filename+"."+ext);
+		for (int c=0; c<5; c++) {
+			file.write(columns[c].header());
+			if (c < 4) {
+				file.write(',');
+			} else {
+				file.write('\n');
+			}
+		}
+		for (int i=0; i<lContent; i++) {
+			content[i].write(file);
+		}
+		file.close();
 	}
 }
-
-// class EmailCSV extends CSV {
-	
-// }
