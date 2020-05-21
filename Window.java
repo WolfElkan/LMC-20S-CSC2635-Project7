@@ -19,7 +19,6 @@ public class Window {
 		final int FRAME_WIDTH  = 400;
 		final int FRAME_HEIGHT = 300;
 		
-		Dimension labelSize = new Dimension(0,70);
 		Dimension contentBoxSize = new Dimension(FRAME_WIDTH,100);
 
 		JEditorPane contentBox = new JEditorPane();
