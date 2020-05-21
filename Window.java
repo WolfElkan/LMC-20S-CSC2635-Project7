@@ -23,9 +23,8 @@ class Field extends JPanel {
 	}
 }
 
-public class Window {
-	public static void main(String[] args) {
-		JFrame frame = new JFrame();
+public class Window extends JFrame {
+	public Window() {
 
 		final int FRAME_WIDTH  = 400;
 		final int FRAME_HEIGHT = 300;
@@ -55,13 +54,19 @@ public class Window {
 
 		compose.add(contentBox);
 		compose.add(sendButton);
-		frame.add(compose);
+		this.add(compose);
 
-		frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
-		frame.setTitle("Compose New Message");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
+		this.setTitle("Compose New Message");
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		frame.setVisible(true);
+	}
+	public void display() {
+		this.setVisible(true);
+	}
+	public static void main(String[] args) {
+		Window window = new Window();
+		window.display();
 	}
 }
 
