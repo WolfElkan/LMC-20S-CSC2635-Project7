@@ -4,8 +4,12 @@ import java.awt.*;
 public class Window {
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
+
+		final int FRAME_WIDTH  = 400;
+		final int FRAME_HEIGHT = 300;
 		
 		Dimension labelSize = new Dimension(0,70);
+		Dimension contentBoxSize = new Dimension(FRAME_WIDTH,100);
 
 		JLabel senLabel = new JLabel("From");
 		JTextField senField = new JTextField("",20);
@@ -28,11 +32,12 @@ public class Window {
 		subPanel.add(subLabel);
 		subPanel.add(subField);
 
-		JTextPane contentBox = new JTextPane();
-
+		JEditorPane contentBox = new JEditorPane();
+		contentBox.setContentType("text/plain");
+		contentBox.setEditable(true);
+		contentBox.setPreferredSize(contentBoxSize);
 
 		JButton send = new JButton("Send Email");
-
 
 		JPanel fields = new JPanel();
 		fields.add(senPanel);
@@ -42,8 +47,6 @@ public class Window {
 		fields.add(send);
 		frame.add(fields);
 
-		final int FRAME_WIDTH = 400;
-		final int FRAME_HEIGHT = 200;
 		frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
 		frame.setTitle("Email Interface");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
