@@ -91,7 +91,6 @@ class Email implements Serializable {
 			case "Date":
 				String parsed = column.read(data);
 				long parsedlong = Long.parseLong(parsed);
-				// System.out.println(parsedlong);
 				this.date = new ExcelDate(new Date(parsedlong));
 				break;
 		}
