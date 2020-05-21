@@ -14,13 +14,14 @@ class Mailbox implements Serializable {
 	}
 	public Mailbox() {}
 	public Mailbox(Scanner file) throws IOException {
-		// char[] cbuf = {};
-		// file.read(cbuf);
-		// System.out.println(file.nextLine());
+		System.out.println("Mailbox.java:17");
 		CSV csv = new CSV(file.nextLine());
-
+		while (file.hasNextLine()) {
+			add(new Email(file.nextLine(),csv));
+		}
 	}
 	public void writeCSV(String filename) throws IOException {
+		System.out.println("Mailbox.java:24");
 		if (filename.contains(".")) {
 			int dot = filename.lastIndexOf(".");
 			String ext = filename.substring(dot+1);
@@ -31,18 +32,13 @@ class Mailbox implements Serializable {
 		}
 	}
 	public void writeCSV(String filename, String ext) throws IOException {
-			StringColumn senColumn = new StringColumn("Sender");
-			StringColumn recColumn = new StringColumn("Recipient");
-			DateColumn  dateColumn = new DateColumn("Date");
-			StringColumn subColumn = new StringColumn("Subject");
-			StringColumn conColumn = new StringColumn("Content");
-		dateColumn.sys = Epoch.MCM;
+		System.out.println("Mailbox.java:35");
 		Column[] columns = {
-			senColumn,
-			recColumn,
-			dateColumn,
-			subColumn,
-			conColumn,
+			new StringColumn("Sender"),
+			new StringColumn("Recipient"),
+			new DateColumn("Date",Epoch.MCM),
+			new StringColumn("Subject"),
+			new StringColumn("Content"),
 		};
 		CSV csv = new CSV(columns);
 		csv.write(filename, ext, this);

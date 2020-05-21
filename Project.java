@@ -18,7 +18,8 @@ class Project {
 		} else {
 			mail = new Mailbox();
 		}
-		// System.out.println(mail);
+		System.out.println(mail);
+		mail.content[0].print();
 
 
 

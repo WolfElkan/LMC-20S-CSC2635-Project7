@@ -28,6 +28,9 @@ public class ExcelDate extends Date {
 	public ExcelDate(Epoch sys, String data, int tzms) {
 		parseAndSet(sys, data, tzms);
 	}
+	public ExcelDate(Date date) {
+		super(date.getTime());
+	}
 
 	private void parseAndSet(Epoch sys, String data, int tzms) {
 		long ms;
@@ -101,7 +104,7 @@ public class ExcelDate extends Date {
 	}
 
 	public static void main(String[] args) {
-		ExcelDate k = new ExcelDate(Epoch.MCM, "43970.515981006945");
+		ExcelDate k = new ExcelDate();
 		System.out.println(k);
 		System.out.println(k.Excel1900());
 	}

@@ -18,7 +18,7 @@ abstract class Column {
 	public Column() {
 		this.title = "unnamed";
 	}
-	public abstract Object read(String data);
+	public abstract String read(String data);
 	public abstract String write(Object entity);
 	public boolean test(String data) {
 		Object entity = read(data);
@@ -29,10 +29,6 @@ abstract class Column {
 		return entity.equals(read(data));
 	}
 	public static Column infer(String header) {
-		// System.out.print(StringColumn.regex);
-		// System.out.print(' ');
-		// System.out.println(header);
-		// System.out.println();
 		Column column = new StringColumn("");
 
 		Pattern stringPattern = Pattern.compile(StringColumn.regex);
@@ -66,10 +62,13 @@ class DateColumn extends Column {
 	public String header() {
 		return "<DateColumn:"+sys+">" + title;
 	}
-	public Object read(String data) {
-		long millisecond = Long.parseLong(data);
-		Date date = new Date(millisecond);
-		return date;
+	public String read(String data) {
+		if (sys == Epoch.UNIX) {
+			return data;
+		} else {
+			ExcelDate date = new ExcelDate(sys, data);
+			return Long.toString(date.getTime());
+		}
 	}
 	public String write(Object entity) {
 		ExcelDate date = (ExcelDate) entity;
@@ -102,7 +101,7 @@ class StringColumn extends Column {
 	public String header() {
 		return "<StringColumn>" + title;
 	}
-	public Object read(String data) {
+	public String read(String data) {
 		return data;
 	}
 	public String write(Object entity) {
@@ -135,7 +134,7 @@ class CSV {
 		this.columns = columns;
 	}
 	public CSV(String head) {
-		Column[] columns = new Column[26];
+		Column[] columns = new Column[5];
 		int c = 0;
 		while (!head.isEmpty() && c < 5) {
 			// System.out.print("----");
@@ -150,6 +149,7 @@ class CSV {
 			columns[c++] = Column.infer(header);
 			head = head.substring(comma+1);
 		}
+		this.columns = new Column[c];
 		this.columns = columns;
 	}
 	public void write(String filename, Mailbox mail) throws IOException {
