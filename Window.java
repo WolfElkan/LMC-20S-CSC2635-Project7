@@ -24,7 +24,7 @@ class Field extends JPanel {
 }
 
 public class Window extends JFrame {
-	public Window() {
+	public Window(Mailbox mailbox) {
 
 		final int FRAME_WIDTH  = 400;
 		final int FRAME_HEIGHT = 300;
@@ -47,6 +47,7 @@ public class Window extends JFrame {
 		Field subField = new Field("Subject",sendAction);
 
 		sendAction.con = contentBox;
+		sendAction.mailbox = mailbox;
 
 		compose.add(senField);
 		compose.add(recField);
@@ -65,7 +66,8 @@ public class Window extends JFrame {
 		this.setVisible(true);
 	}
 	public static void main(String[] args) {
-		Window window = new Window();
+		Mailbox mailbox = new Mailbox();
+		Window window = new Window(mailbox);
 		window.display();
 	}
 }
@@ -75,6 +77,7 @@ class SendMail implements ActionListener {
 	Field rec;
 	Field sub;
 	JEditorPane con;
+	Mailbox mailbox;
 	public void setField(String title, Field field) {
 		switch (title) {
 			case "From":
@@ -95,5 +98,7 @@ class SendMail implements ActionListener {
 			sub.getText(),
 			con.getText()
 		);
+		// System.out.println(email);
+		mailbox.add(email);
 	}
 }
