@@ -22,27 +22,6 @@ public class Window {
 		Dimension labelSize = new Dimension(0,70);
 		Dimension contentBoxSize = new Dimension(FRAME_WIDTH,100);
 
-		// JLabel senLabel = new JLabel("From");
-		// JTextField senField = new JTextField("",20);
-		// senLabel.setMinimumSize(labelSize);
-		// JPanel senPanel = new JPanel();
-		// senPanel.add(senLabel);
-		// senPanel.add(senField);
-
-		// JLabel recLabel = new JLabel("To");
-		// JTextField recField = new JTextField("",20);
-		// recLabel.setMinimumSize(labelSize);
-		// JPanel recPanel = new JPanel();
-		// recPanel.add(recLabel);
-		// recPanel.add(recField);
-
-		// JLabel subLabel = new JLabel("Subject");
-		// JTextField subField = new JTextField("",20);
-		// subLabel.setMinimumSize(labelSize);
-		// JPanel subPanel = new JPanel();
-		// subPanel.add(subLabel);
-		// subPanel.add(subField);
-
 		JEditorPane contentBox = new JEditorPane();
 		contentBox.setContentType("text/plain");
 		contentBox.setEditable(true);
