@@ -98,7 +98,6 @@ class SendMail implements ActionListener {
 			sub.getText(),
 			con.getText()
 		);
-		// System.out.println(email);
 		mailbox.add(email);
 	}
 }

@@ -5,6 +5,10 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.Scanner;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
 class Mailbox implements Serializable {
 	public Email[] content = new Email[256];
 	public int lContent = 0; // length of content
@@ -42,5 +46,73 @@ class Mailbox implements Serializable {
 		};
 		CSV csv = new CSV(columns);
 		csv.write(filename, ext, this);
+	}
+	public static void main(String[] args) {
+		Mailbox mailbox = new Mailbox();
+		MailboxWindow window = new MailboxWindow(mailbox);
+	}
+}
+
+class ColumnPanel {
+	public String title;
+	public int width;
+	public ColumnPanel(String title, int width) {
+		this.title = title;
+		this.width = width;
+	}
+	public JPanel header() {
+		JLabel label = new JLabel(title);
+		JPanel padding = new JPanel();
+		padding.add(label);
+		padding.setPreferredSize(new Dimension(width,40));
+		return padding;
+	}
+}
+
+class MailboxWindow extends JFrame {
+	public MailboxWindow(Mailbox mailbox) {
+
+		final int senWid = 100;
+		final int recWid = 100;
+		final int subWid = 400;
+
+		final int headHeight =  40;
+		final int listHeight = 260;
+
+		final int FRAME_WIDTH = senWid + recWid + subWid;
+		final int FRAME_HEIGHT = 300;
+
+		// JPanel buttonPanel = new JPanel();
+		JButton button = new JButton("New Message");
+		// buttonPanel.add(button);
+
+		JPanel messagesPanel = new JPanel();
+		JPanel headerPanel = new JPanel();
+
+		ColumnPanel senPanel = new ColumnPanel("Sender",senWid);
+		ColumnPanel recPanel = new ColumnPanel("Recipient",recWid);
+		ColumnPanel subPanel = new ColumnPanel("Subject",subWid);
+		
+		JPanel subHeader = subPanel.header();
+		subHeader.setPreferredSize(new Dimension(subWid-200,headHeight));
+
+		headerPanel.add(senPanel.header());
+		headerPanel.add(recPanel.header());
+		headerPanel.add(subHeader);
+		headerPanel.add(button);
+		
+		messagesPanel.add(headerPanel);
+
+		this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
+		this.setTitle("Mailbox");
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		// this.add(buttonPanel);
+		this.add(messagesPanel);
+
+		this.setVisible(true);
+	}
+	public void display() {
+		this.setVisible(true);
 	}
 }
