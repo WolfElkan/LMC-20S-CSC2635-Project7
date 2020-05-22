@@ -48,8 +48,16 @@ class Mailbox implements Serializable {
 		csv.write(filename, ext, this);
 	}
 	public static void main(String[] args) {
-		Mailbox mailbox = new Mailbox();
-		MailboxWindow window = new MailboxWindow(mailbox);
+		Mailbox m = new Mailbox();
+		Email e = new Email(
+			"WolfElkan@landmark.edu",
+			"KarinaAssiter@landmark.edu",
+			"Final Project",
+			"Hello Professor, This is my email."
+		);
+		m.add(e);
+		// Mailbox mailbox = new Mailbox();
+		MailboxWindow window = new MailboxWindow(m);
 	}
 }
 
@@ -80,11 +88,13 @@ class MailboxWindow extends JFrame {
 		final int listHeight = 260;
 
 		final int FRAME_WIDTH = senWid + recWid + subWid;
-		final int FRAME_HEIGHT = 300;
+		final int FRAME_HEIGHT = headHeight + listHeight;
 
 		// JPanel buttonPanel = new JPanel();
 		JButton button = new JButton("New Message");
 		// buttonPanel.add(button);
+
+		JPanel panel = new JPanel();
 
 		JPanel messagesPanel = new JPanel();
 		JPanel headerPanel = new JPanel();
@@ -100,15 +110,21 @@ class MailboxWindow extends JFrame {
 		headerPanel.add(recPanel.header());
 		headerPanel.add(subHeader);
 		headerPanel.add(button);
-		
-		messagesPanel.add(headerPanel);
+
+		ColumnPanel[] columns = {senPanel,recPanel,subPanel};
+
+		for (int e=0; e<mailbox.lContent; e++) {
+			messagesPanel.add(mailbox.content[e].panel(columns));
+		}
 
 		this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
 		this.setTitle("Mailbox");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		// this.add(buttonPanel);
-		this.add(messagesPanel);
+		panel.add(headerPanel);
+		panel.add(messagesPanel);
+		
+		this.add(panel);
 
 		this.setVisible(true);
 	}

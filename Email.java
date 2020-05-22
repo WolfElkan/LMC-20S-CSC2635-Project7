@@ -2,6 +2,8 @@ import java.util.Date;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
+import javax.swing.*;
+
 
 class Email implements Serializable {
 	public String sender;
@@ -50,7 +52,7 @@ class Email implements Serializable {
 	public void write(FileWriter file, Column[] columns) throws IOException {
 		for (int c=0; c<5; c++) {
 			Column column = columns[c];
-			file.write(column.write(get_attr(column)));
+			file.write(column.write(get_attr(column.title)));
 			if (c < 4) {
 				file.write(',');
 			} else {
@@ -58,8 +60,8 @@ class Email implements Serializable {
 			}
 		}
 	}
-	public Object get_attr(Column column) {
-		switch (column.title) {
+	public Object get_attr(String title) {
+		switch (title) {
 			case "Sender":
 				return sender;
 			case "Recipient":
@@ -112,4 +114,22 @@ class Email implements Serializable {
 		Email e = new Email(csvrow);
 		e.print();
 	}
+	public JPanel panel(ColumnPanel[] columns) {
+		JPanel result = new JPanel();
+		for (int c=0; c<columns.length; c++) {
+			result.add(cell(columns[c]));
+		}
+		return result;
+	}
+	public JTextArea cell(ColumnPanel column) {
+		JTextArea result = new JTextArea(1,column.width/14);
+		result.setEditable(false);
+		System.out.println(get_attr(column.title));
+		String text = get_attr(column.title).toString();
+		result.setText(text);
+		return result;
+	}
 }
+
+
+
