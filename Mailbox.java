@@ -80,14 +80,15 @@ class ColumnPanel {
 class MailboxWindow extends JFrame {
 	public MailboxWindow(Mailbox mailbox) {
 
-		final int senWid = 100;
-		final int recWid = 100;
+		final int senWid = 200;
+		final int recWid = 200;
+		final int datWid = 220;
 		final int subWid = 400;
 
 		final int headHeight =  40;
 		final int listHeight = 260;
 
-		final int FRAME_WIDTH = senWid + recWid + subWid;
+		final int FRAME_WIDTH = senWid + datWid + recWid + subWid + 20;
 		final int FRAME_HEIGHT = headHeight + listHeight;
 
 		// JPanel buttonPanel = new JPanel();
@@ -101,6 +102,7 @@ class MailboxWindow extends JFrame {
 
 		ColumnPanel senPanel = new ColumnPanel("Sender",senWid);
 		ColumnPanel recPanel = new ColumnPanel("Recipient",recWid);
+		ColumnPanel datPanel = new ColumnPanel("Date",datWid);
 		ColumnPanel subPanel = new ColumnPanel("Subject",subWid);
 		
 		JPanel subHeader = subPanel.header();
@@ -108,10 +110,11 @@ class MailboxWindow extends JFrame {
 
 		headerPanel.add(senPanel.header());
 		headerPanel.add(recPanel.header());
+		headerPanel.add(datPanel.header());
 		headerPanel.add(subHeader);
 		headerPanel.add(button);
 
-		ColumnPanel[] columns = {senPanel,recPanel,subPanel};
+		ColumnPanel[] columns = {senPanel,recPanel,datPanel,subPanel};
 
 		for (int e=0; e<mailbox.lContent; e++) {
 			messagesPanel.add(mailbox.content[e].panel(columns));

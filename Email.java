@@ -2,6 +2,7 @@ import java.util.Date;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
+import java.awt.Dimension;
 import javax.swing.*;
 
 
@@ -121,12 +122,13 @@ class Email implements Serializable {
 		}
 		return result;
 	}
-	public JTextArea cell(ColumnPanel column) {
-		JTextArea result = new JTextArea(1,column.width/14);
-		result.setEditable(false);
-		System.out.println(get_attr(column.title));
+	public JTextField cell(ColumnPanel column) {
+		// System.out.println(get_attr(column.title));
 		String text = get_attr(column.title).toString();
-		result.setText(text);
+		// result.setText(text);
+		JTextField result = new JTextField(text);
+		result.setPreferredSize(new Dimension(column.width,30));
+		result.setEditable(false);
 		return result;
 	}
 }
