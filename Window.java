@@ -7,7 +7,7 @@ class Field extends JPanel {
 	public Dimension size = new Dimension(0,70);
 	public JTextField field;
 
-	public Field (String title, SendMail listener) {
+	public Field (String title, CreateMessage listener) {
 		JLabel label = new JLabel(title);
 		label.setMinimumSize(size);
 		this.add(label);
@@ -37,7 +37,7 @@ public class Window extends JFrame {
 		contentBox.setPreferredSize(contentBoxSize);
 
 		JButton sendButton = new JButton("Send Email");
-		SendMail sendAction = new SendMail();
+		CreateMessage sendAction = new CreateMessage();
 		sendButton.addActionListener(sendAction);
 
 		JPanel compose = new JPanel();
@@ -72,7 +72,7 @@ public class Window extends JFrame {
 	}
 }
 
-class SendMail implements ActionListener {
+class CreateMessage implements ActionListener {
 	Field sen;
 	Field rec;
 	Field sub;

@@ -56,7 +56,6 @@ class Mailbox implements Serializable {
 			"Hello Professor, This is my email."
 		);
 		m.add(e);
-		// Mailbox mailbox = new Mailbox();
 		MailboxWindow window = new MailboxWindow(m);
 	}
 }
@@ -108,6 +107,8 @@ class MailboxWindow extends JFrame {
 		JPanel subHeader = subPanel.header();
 		subHeader.setPreferredSize(new Dimension(subWid-200,headHeight));
 
+		button.addActionListener(new NewMessage(mailbox));
+
 		headerPanel.add(senPanel.header());
 		headerPanel.add(recPanel.header());
 		headerPanel.add(datPanel.header());
@@ -133,5 +134,16 @@ class MailboxWindow extends JFrame {
 	}
 	public void display() {
 		this.setVisible(true);
+	}
+}
+
+class NewMessage implements ActionListener {
+	public Mailbox mailbox;
+	public NewMessage(Mailbox mailbox) {
+		this.mailbox = mailbox;
+	}
+	public void actionPerformed(ActionEvent event) {
+		Window newMessage = new Window(mailbox);
+		newMessage.display();
 	}
 }
