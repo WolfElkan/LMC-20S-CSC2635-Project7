@@ -48,6 +48,7 @@ public class Window extends JFrame {
 
 		sendAction.con = contentBox;
 		sendAction.mailbox = mailbox;
+		sendAction.window = this;
 
 		compose.add(senField);
 		compose.add(recField);
@@ -78,6 +79,7 @@ class CreateMessage implements ActionListener {
 	Field sub;
 	JEditorPane con;
 	Mailbox mailbox;
+	Window window;
 	public void setField(String title, Field field) {
 		switch (title) {
 			case "From":
@@ -99,5 +101,6 @@ class CreateMessage implements ActionListener {
 			con.getText()
 		);
 		mailbox.add(email);
+		window.setVisible(false);
 	}
 }
