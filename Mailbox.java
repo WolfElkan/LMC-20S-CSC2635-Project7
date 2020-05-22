@@ -146,6 +146,7 @@ class MailboxWindow extends JFrame {
 
 		panel.add(headerPanel);
 		panel.add(messagesPanel);
+		messagesPanel.setPreferredSize(new Dimension(FRAME_WIDTH,listHeight));
 		
 		this.add(panel);
 
