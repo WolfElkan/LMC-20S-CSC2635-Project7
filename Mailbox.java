@@ -88,6 +88,7 @@ class MailboxWindow extends JFrame {
 	public Mailbox mailbox;
 	public JPanel messagesPanel = new JPanel();
 	ColumnPanel[] columns;
+	public WindowListenerClass windowlistener;
 	public MailboxWindow(Mailbox mailbox) {
 
 		mailbox.window = this;
@@ -138,7 +139,10 @@ class MailboxWindow extends JFrame {
 
 		this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
 		this.setTitle("Mailbox");
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
+		windowlistener = new WindowListenerClass(this);
+		this.addWindowListener(windowlistener);
 
 		panel.add(headerPanel);
 		panel.add(messagesPanel);
@@ -174,3 +178,23 @@ class NewMessage implements ActionListener {
 		newMessage.display();
 	}
 }
+
+class WindowListenerClass implements WindowListener {
+	public MailboxWindow window;
+	public WindowListenerClass(MailboxWindow window) {
+		this.window = window;
+	}
+	public void windowOpened(WindowEvent event) {}
+	public void windowClosing(WindowEvent event) {
+		try {
+			window.mailbox.writeCSV("emails.csv");
+			window.dispose();
+		} catch (Exception e) {}
+	}
+	public void windowActivated(WindowEvent event) {}
+	public void windowDeactivated(WindowEvent event) {}
+	public void windowIconified(WindowEvent event) {}
+	public void windowDeiconified(WindowEvent event) {}
+	public void windowClosed(WindowEvent event) {}
+}
+
