@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
 
 class Field extends JPanel {
 
@@ -101,6 +102,8 @@ class CreateMessage implements ActionListener {
 			con.getText()
 		);
 		mailbox.add(email);
-		window.setVisible(false);
+		// window.setVisible(false);
+		window.dispose();
+		// mailbox.writeCSV("emails.csv");
 	}
 }

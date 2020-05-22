@@ -13,8 +13,12 @@ class Mailbox implements Serializable {
 	public Email[] content = new Email[256];
 	public int lContent = 0; // length of content
 	public int sortstate = 0; // how is Mailbox currently sorted
+	public MailboxWindow window;
 	public void add(Email email) {
 		content[lContent++] = email;
+		if (window != null) {
+			window.update(email);
+		}
 	}
 	public Mailbox() {}
 	public Mailbox(Scanner file) throws IOException {
@@ -64,6 +68,7 @@ class Mailbox implements Serializable {
 		// );
 		// m.add(e);
 		MailboxWindow window = new MailboxWindow(m);
+
 	}
 }
 
@@ -84,7 +89,13 @@ class ColumnPanel {
 }
 
 class MailboxWindow extends JFrame {
+	public Mailbox mailbox;
+	public JPanel messagesPanel = new JPanel();
+	ColumnPanel[] columns;
 	public MailboxWindow(Mailbox mailbox) {
+
+		mailbox.window = this;
+		this.mailbox = mailbox;
 
 		final int senWid = 200;
 		final int recWid = 200;
@@ -103,7 +114,6 @@ class MailboxWindow extends JFrame {
 
 		JPanel panel = new JPanel();
 
-		JPanel messagesPanel = new JPanel();
 		JPanel headerPanel = new JPanel();
 
 		ColumnPanel senPanel = new ColumnPanel("Sender",senWid);
@@ -123,9 +133,11 @@ class MailboxWindow extends JFrame {
 		headerPanel.add(button);
 
 		ColumnPanel[] columns = {senPanel,recPanel,datPanel,subPanel};
+		this.columns = columns;
 
 		for (int e=0; e<mailbox.lContent; e++) {
-			messagesPanel.add(mailbox.content[e].panel(columns));
+			// messagesPanel.add(mailbox.content[e].panel(columns));
+			addMessage(mailbox.content[e]);
 		}
 
 		this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
@@ -141,6 +153,17 @@ class MailboxWindow extends JFrame {
 	}
 	public void display() {
 		this.setVisible(true);
+	}
+	public void addMessage(Email email) {
+		// System.out.println(messagesPanel);
+		messagesPanel.add(email.panel(columns));
+	}
+	public void update(Email email) {
+		System.out.println(mailbox.lContent);
+		this.setVisible(false);
+		addMessage(email);
+		this.setVisible(true);
+		// messagesPanel.add(email.panel(columns));
 	}
 }
 
