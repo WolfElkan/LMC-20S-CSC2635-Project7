@@ -56,6 +56,13 @@ class Mailbox implements Serializable {
 			"Hello Professor, This is my email."
 		);
 		m.add(e);
+		// e = new Email(
+		// 	"WolfElkan@landmark.edu",
+		// 	"contact@weirdal.com",
+		// 	"Stinky Cheese",
+		// 	"Hey everyone, listen up, your attention if you please."
+		// );
+		// m.add(e);
 		MailboxWindow window = new MailboxWindow(m);
 	}
 }
